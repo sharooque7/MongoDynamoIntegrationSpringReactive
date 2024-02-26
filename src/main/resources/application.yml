@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dynamo
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@trooze_mongo:27017/asset?authSource=admin
+logging:
+  root: trace
+# DynamoDB table configuration
+dynamodb:
+  tableName: Address
+  readCapacityUnits: 5
+  writeCapacityUnits: 5
+address:
+  repository:
+    type: dynamo # or mongo

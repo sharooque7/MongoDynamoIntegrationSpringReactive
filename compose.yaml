@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb
+    ports:
+      - "9000:8000"
+    networks:
+      - heroze
+    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb"]
+    volumes:
+      - dynamodb-data:/var/dynamodb_local
+  trooze_mongo:
+    image: mongo:latest
+    container_name: trooze_mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: asset
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - heroze
+  java-services:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - heroze
+    depends_on:
+      - dynamodb
+      - trooze_mongo
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target:/usr/src/app/target
+
+volumes:
+  mongodb_data:
+  dynamodb-data:
+networks:
+  heroze:
+    external: true
+    driver: bridge
