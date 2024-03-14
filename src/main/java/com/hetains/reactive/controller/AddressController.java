@@ -25,7 +25,7 @@ public class AddressController {
     @GetMapping("/get/{id}")
     public Mono<ResponseEntity<Address>> get(@PathVariable String id) {
         return this.addressService.findById(id)
-                .map(address -> ResponseEntity.ok(address))
+                .map(address -> ResponseEntity.ok().body(address))
                 .defaultIfEmpty(ResponseEntity.notFound().build()) // Return 404 Not Found if address not found
                 .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }

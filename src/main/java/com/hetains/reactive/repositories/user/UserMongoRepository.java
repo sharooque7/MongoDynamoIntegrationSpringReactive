@@ -13,7 +13,7 @@ public class UserMongoRepository implements UserRepository {
 
     private final ReactiveMongoTemplate mongodbTemplate;
 
-    public UserMongoRepository(@Qualifier("reactiveMongoTemplate") ReactiveMongoTemplate mongodbTemplate) {
+    public UserMongoRepository(@Qualifier("reactiveMongoDBTemplate") ReactiveMongoTemplate mongodbTemplate) {
         this.mongodbTemplate = mongodbTemplate;
     }
 

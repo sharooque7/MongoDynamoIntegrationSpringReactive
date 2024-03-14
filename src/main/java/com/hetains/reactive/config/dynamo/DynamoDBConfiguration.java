@@ -23,7 +23,7 @@ public class DynamoDBConfiguration {
         return DynamoDbClient.builder()
                 .region(Region.US_EAST_1) // Since local DynamoDB doesn't require a region, any valid region can be used
                 .credentialsProvider(credentialsProvider)
-                .endpointOverride(URI.create("http://dynamodb:8000")) // Specify the local DynamoDB endpoint
+                .endpointOverride(URI.create("http://localhost:9000")) // Specify the local DynamoDB endpoint
                 .build();
     }
 
@@ -32,7 +32,7 @@ public class DynamoDBConfiguration {
         return DynamoDbAsyncClient.builder()
                 .region(Region.US_EAST_1)
                 .credentialsProvider(credentialsProvider)
-                .endpointOverride(URI.create("http://dynamodb:8000")) // Specify the local DynamoDB endpoint
+                .endpointOverride(URI.create("http://localhost:9000")) // Specify the local DynamoDB endpoint
                 .build();
     }
 

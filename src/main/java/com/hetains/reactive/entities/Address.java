@@ -1,7 +1,6 @@
 package com.hetains.reactive.entities;
 
 import com.hetains.reactive.utils.SortKeyGenerator;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.annotation.Id;
@@ -23,7 +22,6 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortK
 @DynamoDbBean
 public class Address {
     @Id
-    @Transient
     private String id;
     @Field
     private String country;
@@ -35,13 +33,6 @@ public class Address {
     @DynamoDbSortKey()
     public String getSortKey() {
         return SortKeyGenerator.generateSortKey();
-    }
-    public void setSortKey(String sortKey) {
-        this.sortKey = sortKey;
-    }
-
-    public String getId() {
-        return id;
     }
 
     @DynamoDbPartitionKey

@@ -18,8 +18,8 @@ public class ReactiveMongoDBCOnfiguration {
         return MongoClients.create(mongoDBConnectionUrl);
     }
 
-    @Bean(name="reactiveMongoTemplate")
-    public ReactiveMongoTemplate reactiveMongoTemplate(@Qualifier("reactiveMongoClient") MongoClient mongoClient) {
+    @Bean(name="reactiveMongoDBTemplate")
+    public ReactiveMongoTemplate reactiveMongoDBTemplate(@Qualifier("reactiveMongoClient") MongoClient mongoClient) {
         return new ReactiveMongoTemplate(mongoClient, "asset");
     }
 

@@ -3,7 +3,17 @@ spring:
     active: dynamo
   data:
     mongodb:
-      uri: mongodb://admin:admin@trooze_mongo:27017/asset?authSource=admin
+      uri: mongodb://admin:admin@localhost:27018/asset?authSource=admin
+
+document-db:
+  user: sharooque
+  password: admin123
+  connection-string-template: mongodb://%s:%s@%s:%s/%s?directConnection=true&serverSelectionTimeoutMS=2000&tlsAllowInvalidHostnames=true&tls=true
+  host: localhost
+  port: 27017
+  db-name: platform
+server:
+  port: 8081
 logging:
   root: trace
 # DynamoDB table configuration
@@ -13,4 +23,16 @@ dynamodb:
   writeCapacityUnits: 5
 address:
   repository:
-    type: dynamo # or mongo
+    type: mongo # or mongo
+
+  logging:
+    level:
+      root: info
+      com.hetains.reactive: debug # Set specific package log level
+    file: # Configuration for file-based logging
+      name: myapp.log # File name
+      path: /Users/sharooque/Downloads/reactive 2/logs # File path
+    pattern:
+      console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" # Pattern for console logging
+      file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" # Pattern for file logging
+
